@@ -1,13 +1,13 @@
 "use client";
 import React, { useState } from "react";
-import { useRouter } from "next/router";  // use later
-
-
+import { useRouter } from "next/navigation";  // use later
 
 
 const Home = () => {
   const [username, setusername] = useState("");
   const [password, setpassword] = useState("");
+
+  const router = useRouter();
 
   // const myRouter = useRouter();  // error
   const handleSubmission = async (e:React.FormEvent<HTMLFormElement>) => {
@@ -22,16 +22,16 @@ const Home = () => {
       if(!response.ok) {
         console.log("error while fetching");
       }
-  
-      console.log(data);
+
+      if(data.name === username && data.id === password) {
+        router.push("/Dashboard")
+      }
   
     }
     catch(err) {
       console.error(err)
     }
-  }
-
-  
+  } 
 
 
   return (
