@@ -1,0 +1,9 @@
+.card {
+    height: 250px;
+}
+.card:hover~.card>p {
+    display: none;
+}
+.card:hover {
+    transition: transform 0.5s ease-in-out;
+}

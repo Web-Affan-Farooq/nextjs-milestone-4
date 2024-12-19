@@ -12,6 +12,9 @@ export default {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      transitionProperty: {
+        '0.9': "all 3s ease-in-out"
+      }
     },
   },
   plugins: [],
