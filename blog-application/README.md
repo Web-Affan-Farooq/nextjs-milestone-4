@@ -14,38 +14,15 @@ Approaches:
 
 ---------------layout:
 
-## Home page:
+## landing page:
 header --responsive --fixed --completed
 3 sections
 footer 
 
 
-## Home page:
-header
-3 sections
-footer 
+## Home page where user create blogs:
+header --completed --responsive
+section for creating a new blog
+Footer --completed --responsive
 
-
-import React from 'react';
-
-interface Button {
-    type: string
-}
-const Button = ({ type }: Button) => {
-    if (type === "hide-responsive") {
-        return (
-            <button type="button" className='bg-blue-700 text-white md:px-8 px-0 py-3 rounded-xl font-bold text-1xl transition md:block hidden'>Click</button>
-        )
-    }else if(type === "small") {
-        return (
-            <button type="button" className='bg-blue-700 text-white md:px-8 px-0 py-2 rounded-xl font-bold text-1xl transition block'>Click</button>
-        )
-    } 
-    else {
-        return (
-            <button type="button" className='bg-blue-700 text-white px-8 py-3 rounded-xl font-bold text-1xl transition'>Click</button>
-        )
-    }
-}
-
-export default Button
+handle post form and print data to console

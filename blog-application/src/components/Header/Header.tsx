@@ -24,8 +24,8 @@ const Header = () => {
           <div className={`flex-col md:flex-row relative right-16 top-16 md:top-0 gap-10 md:flex transition-opacity duration-200 ease-in-out md:bg-transparent bg-[rgba(54, 53, 53, 0.9)] backdrop-blur-xl backdrop-opacity-100 md:opacity-100 ${navStatus ? "flex w-full h-96 opacity-100" : "opacity-0 hidden"}`}>
             <div className='nav-options text-center mx-auto py-2.5 px-2 font-normal text-gray-500 '><Link href={'/'} onClick={handleMenu}>Home</Link></div>
             <div className='nav-options text-center py-2.5 px-2 font-normal text-gray-500 '><Link href={'/'} onClick={handleMenu}>About</Link></div>
-            <div className='nav-options text-center py-2.5 px-2 font-normal text-gray-500 '><Link href={'/'} onClick={handleMenu}>Services</Link></div>
-            <div className='nav-options text-center py-2.5 px-2 font-normal text-gray-500 '><Link href={'/'} onClick={handleMenu}>Contact</Link></div>
+            <div className='nav-options text-center py-2.5 px-2 font-normal text-gray-500 '><Link href={'/signup'} onClick={handleMenu}>Signup</Link></div>
+            <div className='nav-options text-center py-2.5 px-2 font-normal text-gray-500 '><Link href={'/login'} onClick={handleMenu}>Login</Link></div>
           </div>
           <div id="menu-icon" onClick={handleMenu} className="md:hidden text-gray-600">{navStatus ? (<i className="fa-solid fa-xmark"></i>) : (<i className="fa-solid fa-bars"></i>)}
           </div>

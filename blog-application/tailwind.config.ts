@@ -14,6 +14,9 @@ export default {
       },
       transitionProperty: {
         '0.9': "all 3s ease-in-out"
+      },
+      backgroundImage: {
+        "signup": "url('/images/signup-background.svg')"
       }
     },
   },
