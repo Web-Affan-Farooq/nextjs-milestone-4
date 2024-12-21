@@ -26,3 +26,8 @@ section for creating a new blog
 Footer --completed --responsive
 
 handle post form and print data to console
+
+
+----------------my notes:
+
+redirecting
