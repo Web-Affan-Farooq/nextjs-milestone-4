@@ -26,6 +26,7 @@ const Header = () => {
             <div className='nav-options text-center py-2.5 px-2 font-normal text-gray-500 '><Link href={'/'} onClick={handleMenu}>About</Link></div>
             <div className='nav-options text-center py-2.5 px-2 font-normal text-gray-500 '><Link href={'/signup'} onClick={handleMenu}>Signup</Link></div>
             <div className='nav-options text-center py-2.5 px-2 font-normal text-gray-500 '><Link href={'/login'} onClick={handleMenu}>Login</Link></div>
+            <div className='nav-options text-center py-2.5 px-2 font-normal text-gray-500 '><Link href={'/blogs'} onClick={handleMenu}>Blogs</Link></div>
           </div>
           <div id="menu-icon" onClick={handleMenu} className="md:hidden text-gray-600">{navStatus ? (<i className="fa-solid fa-xmark"></i>) : (<i className="fa-solid fa-bars"></i>)}
           </div>

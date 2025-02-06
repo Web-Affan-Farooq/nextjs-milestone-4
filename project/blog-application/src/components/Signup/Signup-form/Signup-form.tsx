@@ -1,8 +1,76 @@
 "use client";
 
-import React from 'react'
+import React, {useState, useEffect} from 'react';
+import toast from 'react-hot-toast';
+import SignupFormSchema from '@/validations/SignupSchema';
+import NotifyError from '@/components/Notifications/NotifyError';
+import type { ZodError } from 'zod'
 
 const Signup_form = () => {
+    const [userData, setuserData] = useState<{userName:string; userEmail:string; userPassword:string}>({
+        userName:"",
+        userEmail:"",
+        userPassword:"",
+    });
+    const [load, setload] = useState(false);
+
+
+
+    useEffect(() => {
+        if(load) {
+            const getData = async () => {
+                try {
+                    const response = await fetch("/api/signup", {
+                        method:"POST",
+                        headers: {
+                            "Content-Type":"application/json",
+                        },
+                        body:JSON.stringify(userData),
+                    });
+                    const data = response.json();
+                } catch (err) {
+                    toast.custom(<NotifyError message={`Error while fetching`}/>, {
+                        duration:500,
+                        removeDelay:2000,
+                        style: {
+                            backgroundColor: "rgba(255,255,255,0.5)",
+                            backdropFilter: "blur(20px)",
+                            transition:"all 1s ease-in-out"
+                        }
+                    });
+                }
+            }
+            
+            getData();
+        }
+        return () => {}
+    },[load]);
+
+    const handleSignup = (e:React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        const data = {
+            name:userData.userName.trim(),
+            email:userData.userEmail.trim(),
+            password:userData.userPassword.trim(),
+        }
+        try {
+            SignupFormSchema.parse(data);
+            setload(true);
+        } catch (err:any) {
+            console.log(JSON.parse(err)[0]);
+            console.log(err);            
+            toast.custom(<NotifyError message={`${JSON.parse(err)[0].message}`}/>, {
+                duration:500,
+                removeDelay:2000,
+                style: {
+                    backgroundColor: "rgba(255,255,255,0.5)",
+                    backdropFilter: "blur(20px)",
+                    transition:"all 1s ease-in-out"
+                }
+            });
+        }
+
+    }
 
     return (
         <div className='bg-signup bg-cover bg-center flex justify-center items-center bg-no-repeat w-full h-screen'>
@@ -12,14 +80,17 @@ const Signup_form = () => {
                 <p className='text-gray-400 text-[15px] text-center'>Have an idea? let's tell us</p>
                 <br />
 
-                <form action="/" className='text-center'>
+                <form action="" className='text-center' onSubmit={handleSignup}>
                     <div className='flex flex-col flex-wrap gap-5'>
-                        <input type="text" name='userName' id='user-name' placeholder='Username' required className='w-[300px] rounded-lg px-5 py-2 bg-gray-600'/>
-                        <input type="email" name='email' id='user-email' placeholder='Your email' required className='w-[300px] rounded-lg px-5 py-2 bg-gray-600' />
-                        <input type="password" name='password' id='user-password' placeholder='Set password' required className='w-[300px] rounded-lg px-5 py-2 bg-gray-600'/>
-                        <label htmlFor="For which Idea you were writing your blogs?" id='user-idea'>
-                            <textarea name="userIdea" id="user-idea" placeholder='For effective use of AI ...' className='w-[300px] h-[100px] rounded-lg px-5 py-2 bg-gray-600'></textarea>
-                        </label>
+                        <input type="text" name='userName' id='user-name' placeholder='Username' required className='w-[300px] rounded-lg px-5 py-2 bg-gray-600' onChange={(e:React.ChangeEvent<HTMLInputElement>) => {
+                            setuserData({...userData, userName:e.target.value})
+                        }}/>
+                        <input type="email" name='email' id='user-email' placeholder='Your email' required className='w-[300px] rounded-lg px-5 py-2 bg-gray-600' onChange={(e:React.ChangeEvent<HTMLInputElement>) => {
+                            setuserData({...userData, userEmail:e.target.value})
+                        }}/>
+                        <input type="password" name='password' id='user-password' placeholder='Set password' required className='w-[300px] rounded-lg px-5 py-2 bg-gray-600' onChange={(e:React.ChangeEvent<HTMLInputElement>) => {
+                            setuserData({...userData, userPassword:e.target.value})
+                        }}/>
                     </div>
                     <br />
                     <button type="submit" className='bg-blue-700 text-white px-8 py-3 rounded-xl font-bold text-1xl transition'>Signup</button>
