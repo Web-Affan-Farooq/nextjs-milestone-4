@@ -14,8 +14,6 @@ const Signup_form = () => {
     });
     const [load, setload] = useState(false);
 
-
-
     useEffect(() => {
         if(load) {
             const getData = async () => {
@@ -48,6 +46,17 @@ const Signup_form = () => {
 
     const handleSignup = (e:React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        const specialChars = [
+  "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "_", "+",
+  "-", "=", "{", "}", "[", "]", "|", "\\", ":", ";", "\"", "'",
+  "<", ">", ",", ".", "?", "/"
+];
+    // userData.userPassword.split("").forEach((char:string) => {
+    //     if(specialChars.includes(char)){
+    //         alert("Please include any special character")
+    //     }
+    // });
+
         const data = {
             name:userData.userName.trim(),
             email:userData.userEmail.trim(),
